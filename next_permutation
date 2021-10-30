@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int si=nums.size(),t=-1,mi;
+        for(int i=si-1;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                mi=i;
+                for(int j=i+1;j<si;j++){
+                    if(nums[i-1]<nums[j]&&nums[mi]>nums[j]){
+                        mi=j;
+                    }
+                }
+                
+                t=nums[i-1];
+                nums[i-1]=nums[mi];
+                nums[mi]=t;
+                t=i;
+                break;
+            }
+            
+        }
+        if(t==-1){
+            sort(nums.begin(),nums.end());
+        }else {
+            sort(nums.begin()+t,nums.end());
+        }
+    }
+};
