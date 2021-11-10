@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int binary(vector<vector<int>>& matrix,int l,int u, int x){
+        int m=(l+u)/2;
+        
+        if(u<l){
+            return m;
+        }
+        if(matrix[m][0]==x){
+            cout<<m<<endl;
+            return m;
+        }
+        if(matrix[m][0]<x){
+            return binary(matrix,m+1,u,x);
+        }else return binary(matrix,l,m-1,x);
+    }
+    bool binarys(vector<int>& matrix,int l,int u, int x){
+        int m=(l+u)/2;
+        if(u<l){
+            return 0;
+        }
+        if(matrix[m]==x){
+            return 1;
+        }
+        if(matrix[m]<x){
+            return binarys(matrix,m+1,u,x);
+        }else return binarys(matrix,l,m-1,x);
+        
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int r=matrix.size(),c=matrix[0].size();
+        if(matrix[0][0]>target||matrix[r-1][c-1]<target){
+            return 0;
+        }
+        return binarys(matrix[binary(matrix,0,r-1,target)],0,c-1,target);
+    }
+};
